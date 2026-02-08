@@ -1,0 +1,156 @@
+{
+  "site": {
+    "title": "Tektōns LTD",
+    "tagline": "The Accountant Who Codes"
+  },
+  "hero": {
+    "badge": "SERIES A OPPORTUNITY",
+    "title_line1": "THE BUSINESS ANALYST",
+    "title_line2": "WHO CODES",
+    "subtitle": "Founder, <strong>Tektōns LTD</strong> — Building West Africa's TECH & AI Conglomerate",
+    "description": "One intelligence core. Five interconnected ventures. The TEKTONS model for emerging markets."
+  },
+  "about": {
+    "section_label": "THE ARCHITECT",
+    "title": "I don't just build products—<br><span class=\"accent\">I engineer economic systems.</span>",
+    "signature": "The Business Analyst Who Codes. The Architect Who Scales.",
+    "credentials": [
+      {
+        "icon": "fa-chart-pie",
+        "text": "BSc Administration (Accounting)"
+      },
+      {
+        "icon": "fa-code",
+        "text": "Computer Science Background"
+      }
+    ],
+    "paragraphs": [
+      "I'm the Founder of <strong>Tektōns LTD</strong>, a Ghanaian TECH & AI startup conglomerate: one intelligence core, infinite market vectors.",
+      "My origin story is unconventional. I trained as an accountant—BSc in Administration (Accounting)—where I learned to think in <span class=\"highlight\">unit economics</span>, <span class=\"highlight\">margin architecture</span>, and <span class=\"highlight\">risk mitigation</span>. But I taught myself to <em>build</em>. Today, I am currently pursuing a second degree in Computer Science and I lead R&D in Go, Python, and React, architecting backend systems that scale to millions.",
+      "This dual fluency is my moat.",
+      "In venture building, most technical founders bleed runway chasing product-market fit. Most finance-first operators can't iterate fast enough to survive. <strong>I do both.</strong> I model the CAC:LTV ratios <em>before</em> I write the first microservice. I stress-test the P&L <em>while</em> the codebase compiles.",
+      "The result? <strong class=\"gold\">High-margin AI products designed for profitability from Day Zero.</strong>",
+      "I'm not seeking capital to <em>discover</em> a business model.<br>I'm seeking capital to <strong>accelerate</strong> an ecosystem already in motion."
+    ]
+  },
+  "ventures": [
+    {
+      "id": "campuzon",
+      "name": "CAMPUZON",
+      "tag": "E-COMMERCE",
+      "tagline": "The Trust Protocol for Student Commerce",
+      "description": "A peer-to-peer student marketplace engineered for high-stakes campus transactions. We've productized <strong>trust</strong>—the #1 barrier to GMV in African informal commerce.",
+      "feature_title": "Sale & Purchase Insurance™",
+      "feature_description": "An escrow-native fraud-protection protocol built on accounting principles. Funds held in secure vaults. Algorithmic seller scoring. Auto-triggered insurance payouts. <strong>2-4% premium = secondary revenue stream.</strong>",
+      "data_flow": "Trust Scores feed REBOT logistics",
+      "size": "medium",
+      "stage": "implementation"
+    },
+    {
+      "id": "rebot",
+      "name": "REBOT",
+      "tag": "TRAVEL ASSISTANT",
+      "tagline": "Your AI Chief of Staff for Movement",
+      "description": "Autonomous AI agent for travel planning and real-time health consultation. Dynamic itinerary optimization. Destination health risk assessment. Telemedicine escalation.",
+      "data_flow": "Campuzon Trust Scores",
+      "size": "medium",
+      "stage": "design"
+    },
+    {
+      "id": "bella",
+      "name": "myBELLA",
+      "tag": "WELLNESS AI",
+      "tagline": "The Companion That Knows You",
+      "description": "Emotionally intelligent AI companion. Romantic partnership simulation. Mental wellness coaching. Persistent memory. Adaptive personality. Crisis detection protocols.",
+      "data_flow": "Travel stress + learning patterns",
+      "size": "medium",
+      "stage": "planning"
+    },
+    {
+      "id": "athena",
+      "name": "ATHENA",
+      "tag": "EDU-TECH",
+      "tagline": "Personalized Learning Engine",
+      "description": "AI-powered adaptive curriculum. Data collection engine for cognitive patterns. B2B2C model.",
+      "size": "small",
+      "stage": "planning"
+    },
+    {
+      "id": "gaia",
+      "name": "GAIA",
+      "tag": "AGRI-TECH",
+      "tagline": "Intelligence for the Harvest",
+      "description": "Precision agriculture AI. Satellite + IoT fusion. Local language voice interfaces. 25% of West African GDP.",
+      "size": "small",
+      "stage": "planning"
+    }
+  ],
+  "arsenal": [
+    {
+      "category": "Backend Architecture",
+      "name": "Go / Python / Express",
+      "icon": "fa-server",
+      "context": "High-concurrency microservices in Go. Python for rapid API development. Express.js for Node-based backends. Sub-10ms response times at scale."
+    },
+    {
+      "category": "AI/ML Orchestration",
+      "name": "Python",
+      "icon": "fa-brain",
+      "context": "Model training, data pipelines, LLM integration. myBella's emotional cognition. Athena's adaptive algorithms."
+    },
+    {
+      "category": "User Interface",
+      "name": "React / Next.js",
+      "icon": "fa-react",
+      "icon_type": "brands",
+      "context": "All consumer-facing frontends. Mobile-first, PWA-ready. Campuzon's marketplace UI."
+    },
+    {
+      "category": "Financial Modeling",
+      "name": "Excel + Pandas",
+      "icon": "fa-chart-line",
+      "context": "Unit economics simulators, runway projections, M&A scenarios. Every venture stress-tested before code."
+    },
+    {
+      "category": "Risk Mitigation",
+      "name": "Fraud Analytics",
+      "icon": "fa-shield",
+      "context": "Campuzon's S&P Insurance protocol. GAAP-compliant escrow logic. Statistical anomaly detection."
+    },
+    {
+      "category": "Infrastructure",
+      "name": "Docker • K8s • GCP",
+      "icon": "fa-cloud",
+      "context": "Multi-region deployment. Auto-scaling. 99.9% uptime SLAs. PostgreSQL, Redis, BigQuery."
+    }
+  ],
+  "metrics": [
+    {
+      "value": 5,
+      "label": "Active Ventures"
+    },
+    {
+      "value": 1,
+      "suffix": "Core",
+      "label": "Unified Engine"
+    },
+    {
+      "value": 3,
+      "suffix": "Sectors",
+      "label": "Market Vectors"
+    },
+    {
+      "value": 2,
+      "prefix": "$",
+      "suffix": "M",
+      "label": "Series A Target"
+    }
+  ],
+  "contact": {
+    "email": "founder@tektons.io",
+    "linkedin": "#",
+    "calendar": "#",
+    "location": "Based in Ghana. Building for the world."
+  },
+  "thesis": "You're not investing in a startup. You're investing in a <strong>holding company with a thesis</strong>—the innovative model applied to Ghana's emerging digital economy. One core. Infinite market applications. Compounding data advantages."
+}

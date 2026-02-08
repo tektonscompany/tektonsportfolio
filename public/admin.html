@@ -1,0 +1,1651 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel | Tektōns LTD</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #0f0f0f;
+            --bg-secondary: #1a1a1a;
+            --bg-elevated: #242424;
+            --bg-hover: #2a2a2a;
+            --accent-gold: #d4a853;
+            --accent-gold-dim: rgba(212, 168, 83, 0.1);
+            --accent-cyan: #00d4aa;
+            --accent-cyan-dim: rgba(0, 212, 170, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --text-muted: #666666;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --border-hover: rgba(255, 255, 255, 0.15);
+            --danger: #ef4444;
+            --danger-dim: rgba(239, 68, 68, 0.1);
+            --success: #22c55e;
+            --success-dim: rgba(34, 197, 94, 0.1);
+            --warning: #f59e0b;
+            --radius-sm: 6px;
+            --radius-md: 10px;
+            --radius-lg: 16px;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.5);
+            --transition: all 0.2s ease;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-secondary);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--bg-elevated);
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--text-muted);
+        }
+
+        /* ========== LOGIN PAGE ========== */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background: 
+                radial-gradient(ellipse at top, rgba(212, 168, 83, 0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at bottom right, rgba(0, 212, 170, 0.03) 0%, transparent 50%),
+                var(--bg-primary);
+        }
+        
+        .login-box {
+            background: var(--bg-secondary);
+            padding: 3rem;
+            border-radius: var(--radius-lg);
+            width: 100%;
+            max-width: 420px;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .login-logo {
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        
+        .login-logo .logo-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.5rem;
+            color: var(--bg-primary);
+        }
+        
+        .login-logo h1 {
+            color: var(--text-primary);
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+        
+        .login-logo p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        /* ========== FORM ELEMENTS ========== */
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.8125rem;
+            font-weight: 500;
+        }
+        
+        .form-group input, 
+        .form-group textarea, 
+        .form-group select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            background: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-sm);
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            font-family: inherit;
+            transition: var(--transition);
+        }
+        
+        .form-group input:hover,
+        .form-group textarea:hover,
+        .form-group select:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .form-group input:focus, 
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--accent-gold);
+            box-shadow: 0 0 0 3px var(--accent-gold-dim);
+        }
+        
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23666' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 0.75rem center;
+            padding-right: 2.5rem;
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 500;
+            font-family: inherit;
+            cursor: pointer;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+            color: var(--bg-primary);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 16px rgba(212, 168, 83, 0.3);
+        }
+
+        .btn-primary.btn-full {
+            width: 100%;
+            padding: 0.875rem 1.5rem;
+        }
+        
+        .btn-secondary {
+            background: var(--bg-elevated);
+            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-secondary:hover {
+            background: var(--bg-hover);
+            border-color: var(--border-hover);
+        }
+        
+        .btn-danger {
+            background: var(--danger-dim);
+            color: var(--danger);
+            border: 1px solid transparent;
+        }
+
+        .btn-danger:hover {
+            background: var(--danger);
+            color: white;
+        }
+        
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #16a34a;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: var(--text-secondary);
+            padding: 0.5rem;
+        }
+
+        .btn-ghost:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.75rem;
+            font-size: 0.8125rem;
+        }
+
+        /* ========== ALERTS ========== */
+        .error-msg, .success-msg {
+            padding: 0.875rem 1rem;
+            border-radius: var(--radius-sm);
+            margin-bottom: 1rem;
+            font-size: 0.875rem;
+            display: none;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .error-msg {
+            background: var(--danger-dim);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            color: var(--danger);
+        }
+        
+        .success-msg {
+            background: var(--success-dim);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            color: var(--success);
+        }
+
+        /* ========== ADMIN LAYOUT ========== */
+        .admin-container {
+            display: none;
+            min-height: 100vh;
+        }
+        
+        .admin-header {
+            background: var(--bg-secondary);
+            padding: 0 1.5rem;
+            height: 64px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .admin-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-weight: 600;
+            font-size: 1.125rem;
+        }
+
+        .admin-logo .logo-mark {
+            width: 32px;
+            height: 32px;
+            background: linear-gradient(135deg, var(--accent-gold), #b8860b);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            color: var(--bg-primary);
+        }
+        
+        .admin-nav {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .admin-layout {
+            display: flex;
+            min-height: calc(100vh - 64px);
+        }
+        
+        .admin-sidebar {
+            width: 260px;
+            background: var(--bg-secondary);
+            padding: 1.5rem 1rem;
+            border-right: 1px solid var(--border-color);
+            position: sticky;
+            top: 64px;
+            height: calc(100vh - 64px);
+            overflow-y: auto;
+        }
+
+        .sidebar-section {
+            margin-bottom: 1.5rem;
+        }
+
+        .sidebar-section-title {
+            font-size: 0.6875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            padding: 0 0.75rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+        }
+        
+        .sidebar-menu li {
+            margin-bottom: 2px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 0.75rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            border-radius: var(--radius-sm);
+            font-size: 0.875rem;
+            font-weight: 450;
+            transition: var(--transition);
+        }
+        
+        .sidebar-menu a:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+
+        .sidebar-menu a.active {
+            background: var(--accent-gold-dim);
+            color: var(--accent-gold);
+        }
+        
+        .sidebar-menu i {
+            width: 18px;
+            font-size: 0.9375rem;
+            opacity: 0.8;
+        }
+
+        /* ========== MAIN CONTENT ========== */
+        .admin-content {
+            flex: 1;
+            padding: 2rem;
+            overflow-y: auto;
+            background: var(--bg-primary);
+        }
+        
+        .content-section {
+            display: none;
+            max-width: 960px;
+            animation: fadeIn 0.2s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .content-section.active {
+            display: block;
+        }
+
+        .page-header {
+            margin-bottom: 2rem;
+        }
+        
+        .page-header h2 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        .page-header h2 i {
+            color: var(--accent-gold);
+            font-size: 1.25rem;
+        }
+
+        .page-header p {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            margin-bottom: 1.25rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .card:hover {
+            border-color: var(--border-hover);
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.25rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card h3 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card h3 i {
+            color: var(--accent-cyan);
+            font-size: 0.875rem;
+        }
+        
+        .card-actions {
+            display: flex;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* ========== ITEM CARDS (Ventures/Arsenal) ========== */
+        .item-card {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            padding: 1.25rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--border-color);
+            transition: var(--transition);
+        }
+
+        .item-card:hover {
+            border-color: var(--border-hover);
+        }
+
+        .item-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .item-card-header h4 {
+            font-size: 0.9375rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .item-card-header h4 i {
+            color: var(--accent-gold);
+        }
+
+        .item-card-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+
+        .item-card-grid .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        /* ========== METRICS GRID ========== */
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .metric-item {
+            background: var(--bg-elevated);
+            padding: 1.25rem;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--border-color);
+        }
+
+        .metric-item .form-group {
+            margin-bottom: 0.75rem;
+        }
+
+        .metric-item .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        /* ========== LOGS TABLE ========== */
+        .logs-table-container {
+            background: var(--bg-elevated);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .logs-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8125rem;
+        }
+
+        .logs-table th {
+            background: var(--bg-secondary);
+            padding: 0.75rem 1rem;
+            text-align: left;
+            font-weight: 600;
+            color: var(--text-muted);
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .logs-table td {
+            padding: 0.625rem 1rem;
+            border-bottom: 1px solid var(--border-color);
+            color: var(--text-secondary);
+        }
+
+        .logs-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .logs-table tr:hover td {
+            background: var(--bg-hover);
+        }
+
+        .log-method {
+            font-weight: 600;
+            font-family: 'SF Mono', Monaco, monospace;
+            font-size: 0.75rem;
+        }
+
+        .log-method.get { color: var(--accent-cyan); }
+        .log-method.post { color: var(--accent-gold); }
+        .log-method.put, .log-method.patch { color: var(--warning); }
+        .log-method.delete { color: var(--danger); }
+
+        .log-status {
+            font-weight: 600;
+            padding: 0.125rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+        }
+
+        .log-status.success { background: var(--success-dim); color: var(--success); }
+        .log-status.error { background: var(--danger-dim); color: var(--danger); }
+
+        /* ========== MODAL ========== */
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+        
+        .modal.show {
+            display: flex;
+        }
+        
+        .modal-content {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-lg);
+            padding: 1.5rem;
+            width: 100%;
+            max-width: 560px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .modal-header h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+        
+        .modal-close {
+            background: var(--bg-elevated);
+            border: none;
+            color: var(--text-secondary);
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .modal-close:hover {
+            background: var(--bg-hover);
+            color: var(--text-primary);
+        }
+        
+        .modal-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border-color);
+        }
+
+        /* ========== ACTION BAR ========== */
+        .action-bar {
+            display: flex;
+            gap: 0.75rem;
+            padding: 1rem 0;
+            margin-top: 0.5rem;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 1024px) {
+            .item-card-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .admin-layout {
+                flex-direction: column;
+            }
+            
+            .admin-sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                top: 0;
+                border-right: none;
+                border-bottom: 1px solid var(--border-color);
+                padding: 1rem;
+            }
+            
+            .sidebar-menu {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 0.25rem;
+            }
+            
+            .sidebar-menu li {
+                margin: 0;
+            }
+
+            .sidebar-menu a {
+                padding: 0.5rem 0.75rem;
+            }
+
+            .sidebar-section-title {
+                display: none;
+            }
+            
+            .metrics-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .admin-content {
+                padding: 1.5rem 1rem;
+            }
+
+            .logs-table-container {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Login Form -->
+    <div class="login-container" id="loginPage">
+        <div class="login-box">
+            <div class="login-logo">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-gem"></i>
+                </div>
+                <h1>TEKTŌNS</h1>
+                <p>Content Management System</p>
+                <p class="visitor-ip" id="visitorIp" style="margin-top: 1rem; font-size: 0.75rem; color: var(--text-muted);"><i class="fa-solid fa-network-wired"></i> <span></span></p>
+            </div>
+            <div class="error-msg" id="loginError"><i class="fa-solid fa-circle-exclamation"></i> <span></span></div>
+            <form id="loginForm">
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="Enter your username" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Enter your password" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-full">
+                    <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                    Sign In
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Admin Dashboard -->
+    <div class="admin-container" id="adminDashboard">
+        <header class="admin-header">
+            <div class="admin-logo">
+                <div class="logo-mark"><i class="fa-solid fa-gem"></i></div>
+                <span>TEKTŌNS</span>
+            </div>
+            <nav class="admin-nav">
+                <a href="/" class="btn btn-secondary btn-sm" target="_blank">
+                    <i class="fa-solid fa-external-link"></i> View Site
+                </a>
+                <button class="btn btn-ghost" id="logoutBtn">
+                    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                </button>
+            </nav>
+        </header>
+        
+        <div class="admin-layout">
+            <aside class="admin-sidebar">
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Content</div>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" data-section="hero" class="active"><i class="fa-solid fa-sparkles"></i> Hero</a></li>
+                        <li><a href="#" data-section="about"><i class="fa-solid fa-user"></i> About</a></li>
+                        <li><a href="#" data-section="ventures"><i class="fa-solid fa-rocket"></i> Ventures</a></li>
+                        <li><a href="#" data-section="arsenal"><i class="fa-solid fa-code"></i> Arsenal</a></li>
+                        <li><a href="#" data-section="metrics"><i class="fa-solid fa-chart-simple"></i> Metrics</a></li>
+                        <li><a href="#" data-section="contact"><i class="fa-solid fa-address-card"></i> Contact</a></li>
+                    </ul>
+                </div>
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">System</div>
+                    <ul class="sidebar-menu">
+                        <li><a href="#" data-section="logs"><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</a></li>
+                        <li><a href="#" data-section="settings"><i class="fa-solid fa-sliders"></i> Settings</a></li>
+                    </ul>
+                </div>
+            </aside>
+            
+            <main class="admin-content">
+                <div class="success-msg" id="saveSuccess"><i class="fa-solid fa-check-circle"></i> Changes saved successfully!</div>
+                <div class="error-msg" id="saveError"><i class="fa-solid fa-circle-exclamation"></i> <span></span></div>
+                
+                <!-- Hero Section -->
+                <section class="content-section active" id="section-hero">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-sparkles"></i> Hero Section</h2>
+                        <p>Customize the main landing section of your portfolio</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-pen"></i> Hero Content</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Badge Text</label>
+                            <input type="text" id="hero-badge" data-path="hero.badge" placeholder="e.g., SERIES A OPPORTUNITY">
+                        </div>
+                        <div class="form-group">
+                            <label>Title Line 1</label>
+                            <input type="text" id="hero-title1" data-path="hero.title_line1" placeholder="First line of your headline">
+                        </div>
+                        <div class="form-group">
+                            <label>Title Line 2</label>
+                            <input type="text" id="hero-title2" data-path="hero.title_line2" placeholder="Second line of your headline">
+                        </div>
+                        <div class="form-group">
+                            <label>Subtitle (HTML allowed)</label>
+                            <textarea id="hero-subtitle" data-path="hero.subtitle" placeholder="Your role and company..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Description</label>
+                            <textarea id="hero-description" data-path="hero.description" placeholder="Brief description of your work..."></textarea>
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-success" onclick="saveSection('hero')">
+                                <i class="fa-solid fa-check"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- About Section -->
+                <section class="content-section" id="section-about">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-user"></i> About Section</h2>
+                        <p>Tell your story and background</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-heading"></i> Section Header</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Section Label</label>
+                            <input type="text" id="about-label" data-path="about.section_label" placeholder="e.g., THE ARCHITECT">
+                        </div>
+                        <div class="form-group">
+                            <label>Title (HTML allowed)</label>
+                            <textarea id="about-title" data-path="about.title" placeholder="Your main title..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Signature</label>
+                            <input type="text" id="about-signature" data-path="about.signature">
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-paragraph"></i> Bio Paragraphs</h3>
+                        </div>
+                        <div id="about-paragraphs"></div>
+                        <div class="card-actions">
+                            <button class="btn btn-secondary" onclick="addParagraph()">
+                                <i class="fa-solid fa-plus"></i> Add Paragraph
+                            </button>
+                        </div>
+                    </div>
+                    <div class="action-bar">
+                        <button class="btn btn-success" onclick="saveSection('about')">
+                            <i class="fa-solid fa-check"></i> Save Changes
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Ventures Section -->
+                <section class="content-section" id="section-ventures">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-rocket"></i> Ventures</h2>
+                        <p>Manage your portfolio ventures and projects</p>
+                    </div>
+                    <div id="ventures-list"></div>
+                    <div class="action-bar">
+                        <button class="btn btn-primary" onclick="addVenture()">
+                            <i class="fa-solid fa-plus"></i> Add Venture
+                        </button>
+                        <button class="btn btn-success" onclick="saveSection('ventures')">
+                            <i class="fa-solid fa-check"></i> Save All Changes
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Arsenal Section -->
+                <section class="content-section" id="section-arsenal">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-code"></i> Arsenal / Skills</h2>
+                        <p>Showcase your technical skills and tools</p>
+                    </div>
+                    <div id="arsenal-list"></div>
+                    <div class="action-bar">
+                        <button class="btn btn-primary" onclick="addSkill()">
+                            <i class="fa-solid fa-plus"></i> Add Skill
+                        </button>
+                        <button class="btn btn-success" onclick="saveSection('arsenal')">
+                            <i class="fa-solid fa-check"></i> Save All Changes
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Metrics Section -->
+                <section class="content-section" id="section-metrics">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-chart-simple"></i> Metrics</h2>
+                        <p>Display key numbers and investment thesis</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-hashtag"></i> Key Metrics</h3>
+                        </div>
+                        <div id="metrics-list" class="metrics-grid"></div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-lightbulb"></i> Investment Thesis</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Thesis Text (HTML allowed)</label>
+                            <textarea id="thesis-text" data-path="thesis" rows="4" placeholder="Your investment thesis..."></textarea>
+                        </div>
+                    </div>
+                    <div class="action-bar">
+                        <button class="btn btn-success" onclick="saveMetrics()">
+                            <i class="fa-solid fa-check"></i> Save Changes
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Contact Section -->
+                <section class="content-section" id="section-contact">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-address-card"></i> Contact</h2>
+                        <p>Manage your contact information and links</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-link"></i> Contact Details</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Email Address</label>
+                            <input type="email" id="contact-email" data-path="contact.email" placeholder="your@email.com">
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn URL</label>
+                            <input type="url" id="contact-linkedin" data-path="contact.linkedin" placeholder="https://linkedin.com/in/...">
+                        </div>
+                        <div class="form-group">
+                            <label>Calendar/Scheduling URL</label>
+                            <input type="url" id="contact-calendar" data-path="contact.calendar" placeholder="https://calendly.com/...">
+                        </div>
+                        <div class="form-group">
+                            <label>Location Text</label>
+                            <input type="text" id="contact-location" data-path="contact.location" placeholder="e.g., Based in West Africa">
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-success" onclick="saveSection('contact')">
+                                <i class="fa-solid fa-check"></i> Save Changes
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Settings Section -->
+                <section class="content-section" id="section-settings">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-sliders"></i> Settings</h2>
+                        <p>Configure site settings and security</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-globe"></i> Site Settings</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Site Title</label>
+                            <input type="text" id="site-title" data-path="site.title" placeholder="Your site name">
+                        </div>
+                        <div class="form-group">
+                            <label>Tagline</label>
+                            <input type="text" id="site-tagline" data-path="site.tagline" placeholder="Your tagline">
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-success" onclick="saveSiteSettings()">
+                                <i class="fa-solid fa-check"></i> Save Settings
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-lock"></i> Change Password</h3>
+                        </div>
+                        <div class="form-group">
+                            <label>Current Password</label>
+                            <input type="password" id="current-password" placeholder="Enter current password">
+                        </div>
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" id="new-password" placeholder="Enter new password">
+                        </div>
+                        <div class="form-group">
+                            <label>Confirm New Password</label>
+                            <input type="password" id="confirm-password" placeholder="Confirm new password">
+                        </div>
+                        <div class="card-actions">
+                            <button class="btn btn-primary" onclick="changePassword()">
+                                <i class="fa-solid fa-key"></i> Update Password
+                            </button>
+                        </div>
+                    </div>
+                </section>
+                
+                <!-- Logs Section -->
+                <section class="content-section" id="section-logs">
+                    <div class="page-header">
+                        <h2><i class="fa-solid fa-clock-rotate-left"></i> Activity Logs</h2>
+                        <p>Monitor site activity and access history</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-list"></i> Recent Activity</h3>
+                            <div style="display: flex; gap: 0.5rem;">
+                                <select id="logFile" onchange="loadLogs()">
+                                    <option value="">Today</option>
+                                </select>
+                                <button class="btn btn-secondary btn-sm" onclick="loadLogs()">
+                                    <i class="fa-solid fa-arrows-rotate"></i> Refresh
+                                </button>
+                            </div>
+                        </div>
+                        <div class="logs-table-container" style="max-height: 400px; overflow-y: auto;">
+                            <table class="logs-table">
+                                <thead>
+                                    <tr>
+                                        <th>Time</th>
+                                        <th>Method</th>
+                                        <th>URL</th>
+                                        <th>Status</th>
+                                        <th>Duration</th>
+                                        <th>IP Address</th>
+                                        <th>User</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="logsTableBody">
+                                    <tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--text-muted);">Loading logs...</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-broom"></i> Log Management</h3>
+                        </div>
+                        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.875rem;">Clean up old log files to save disk space.</p>
+                        <div class="card-actions">
+                            <button class="btn btn-danger" onclick="cleanupLogs()">
+                                <i class="fa-solid fa-trash-can"></i> Delete logs older than 30 days
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Edit Modal -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Edit Item</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div id="modalBody"></div>
+            <div class="modal-actions">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancel</button>
+                <button class="btn btn-success" id="modalSave">Save</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let contentData = {};
+        
+        // Check auth status on load
+        document.addEventListener('DOMContentLoaded', async () => {
+            const res = await fetch('/api/auth/status');
+            const data = await res.json();
+            
+            if (data.authenticated) {
+                showDashboard();
+                loadContent();
+            } else {
+                // Show visitor IP on login page
+                const ipSpan = document.querySelector('#visitorIp span');
+                if (ipSpan && data.ip) {
+                    ipSpan.textContent = `Your IP: ${data.ip}`;
+                }
+            }
+        });
+        
+        // Login form
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+            
+            try {
+                const res = await fetch('/api/auth/login', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ username, password })
+                });
+                
+                if (res.ok) {
+                    showDashboard();
+                    loadContent();
+                } else {
+                    showError('loginError', 'Invalid username or password');
+                }
+            } catch (err) {
+                showError('loginError', 'Connection error');
+            }
+        });
+        
+        // Logout
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await fetch('/api/auth/logout', { method: 'POST' });
+            location.reload();
+        });
+        
+        // Navigation
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const section = link.dataset.section;
+                
+                document.querySelectorAll('.sidebar-menu a').forEach(l => l.classList.remove('active'));
+                link.classList.add('active');
+                
+                document.querySelectorAll('.content-section').forEach(s => s.classList.remove('active'));
+                document.getElementById('section-' + section).classList.add('active');
+                
+                // Load logs when logs section is opened
+                if (section === 'logs') {
+                    loadLogs();
+                }
+            });
+        });
+        
+        function showDashboard() {
+            document.getElementById('loginPage').style.display = 'none';
+            document.getElementById('adminDashboard').style.display = 'block';
+            loadLogFiles(); // Load available log files
+        }
+        
+        function showError(elementId, message) {
+            const el = document.getElementById(elementId);
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 5000);
+        }
+        
+        function showSuccess(message) {
+            const el = document.getElementById('saveSuccess');
+            el.textContent = message;
+            el.style.display = 'block';
+            setTimeout(() => el.style.display = 'none', 3000);
+        }
+        
+        async function loadContent() {
+            const res = await fetch('/api/content');
+            contentData = await res.json();
+            populateFields();
+        }
+        
+        function populateFields() {
+            // Hero
+            document.getElementById('hero-badge').value = contentData.hero?.badge || '';
+            document.getElementById('hero-title1').value = contentData.hero?.title_line1 || '';
+            document.getElementById('hero-title2').value = contentData.hero?.title_line2 || '';
+            document.getElementById('hero-subtitle').value = contentData.hero?.subtitle || '';
+            document.getElementById('hero-description').value = contentData.hero?.description || '';
+            
+            // About
+            document.getElementById('about-label').value = contentData.about?.section_label || '';
+            document.getElementById('about-title').value = contentData.about?.title || '';
+            document.getElementById('about-signature').value = contentData.about?.signature || '';
+            
+            // Paragraphs
+            const paragraphsContainer = document.getElementById('about-paragraphs');
+            paragraphsContainer.innerHTML = '';
+            contentData.about?.paragraphs?.forEach((p, i) => {
+                paragraphsContainer.innerHTML += `
+                    <div class="form-group">
+                        <label>Paragraph ${i + 1}</label>
+                        <textarea class="paragraph-input" data-index="${i}">${p}</textarea>
+                    </div>
+                `;
+            });
+            
+            // Ventures
+            const venturesList = document.getElementById('ventures-list');
+            venturesList.innerHTML = '';
+            contentData.ventures?.forEach((v, i) => {
+                venturesList.innerHTML += `
+                    <div class="item-card" data-index="${i}">
+                        <div class="item-card-header">
+                            <h4><i class="fa-solid fa-rocket"></i> ${v.name || 'New Venture'}</h4>
+                            <button class="btn btn-danger btn-sm" onclick="deleteVenture(${i})">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                        <div class="item-card-grid">
+                            <div class="form-group">
+                                <label>Venture ID</label>
+                                <input type="text" class="venture-id" data-index="${i}" value="${v.id || ''}" placeholder="lowercase-no-spaces">
+                            </div>
+                            <div class="form-group">
+                                <label>Display Name</label>
+                                <input type="text" class="venture-name" data-index="${i}" value="${v.name || ''}" placeholder="VENTURE NAME">
+                            </div>
+                            <div class="form-group">
+                                <label>Category Tag</label>
+                                <input type="text" class="venture-tag" data-index="${i}" value="${v.tag || ''}" placeholder="FINTECH / AI">
+                            </div>
+                            <div class="form-group">
+                                <label>Card Size</label>
+                                <select class="venture-size" data-index="${i}">
+                                    <option value="small" ${v.size === 'small' ? 'selected' : ''}>Small</option>
+                                    <option value="medium" ${v.size === 'medium' ? 'selected' : ''}>Medium</option>
+                                    <option value="featured" ${v.size === 'featured' ? 'selected' : ''}>Featured</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Development Stage</label>
+                                <select class="venture-stage" data-index="${i}">
+                                    <option value="planning" ${v.stage === 'planning' ? 'selected' : ''}>Planning</option>
+                                    <option value="design" ${v.stage === 'design' ? 'selected' : ''}>Design</option>
+                                    <option value="implementation" ${v.stage === 'implementation' ? 'selected' : ''}>Implementation</option>
+                                    <option value="finished" ${v.stage === 'finished' ? 'selected' : ''}>Finished</option>
+                                </select>
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Tagline</label>
+                                <input type="text" class="venture-tagline" data-index="${i}" value="${v.tagline || ''}" placeholder="Short catchy tagline">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Description (HTML allowed)</label>
+                                <textarea class="venture-description" data-index="${i}" placeholder="Describe what this venture does...">${v.description || ''}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Arsenal
+            const arsenalList = document.getElementById('arsenal-list');
+            arsenalList.innerHTML = '';
+            contentData.arsenal?.forEach((a, i) => {
+                arsenalList.innerHTML += `
+                    <div class="item-card" data-index="${i}">
+                        <div class="item-card-header">
+                            <h4><i class="fa-solid ${a.icon || 'fa-code'}"></i> ${a.name || 'New Skill'}</h4>
+                            <button class="btn btn-danger btn-sm" onclick="deleteSkill(${i})">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                        <div class="item-card-grid">
+                            <div class="form-group">
+                                <label>Category</label>
+                                <input type="text" class="arsenal-category" data-index="${i}" value="${a.category || ''}" placeholder="BACKEND ARCHITECTURE">
+                            </div>
+                            <div class="form-group">
+                                <label>Skill Name</label>
+                                <input type="text" class="arsenal-name" data-index="${i}" value="${a.name || ''}" placeholder="Go / Python / etc">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Icon (FontAwesome class: fa-bolt, fa-code, fa-brain, etc.)</label>
+                                <input type="text" class="arsenal-icon" data-index="${i}" value="${a.icon || 'fa-code'}" placeholder="fa-code">
+                            </div>
+                            <div class="form-group full-width">
+                                <label>Context / Description</label>
+                                <textarea class="arsenal-context" data-index="${i}" placeholder="How you use this skill...">${a.context || ''}</textarea>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            // Metrics
+            const metricsList = document.getElementById('metrics-list');
+            metricsList.innerHTML = '';
+            contentData.metrics?.forEach((m, i) => {
+                metricsList.innerHTML += `
+                    <div class="metric-item">
+                        <div class="form-group">
+                            <label>Value</label>
+                            <input type="number" class="metric-value" data-index="${i}" value="${m.value}" placeholder="5">
+                        </div>
+                        <div class="form-group">
+                            <label>Label</label>
+                            <input type="text" class="metric-label" data-index="${i}" value="${m.label}" placeholder="Active Ventures">
+                        </div>
+                        <div class="form-group">
+                            <label>Prefix</label>
+                            <input type="text" class="metric-prefix" data-index="${i}" value="${m.prefix || ''}" placeholder="$">
+                        </div>
+                        <div class="form-group">
+                            <label>Suffix</label>
+                            <input type="text" class="metric-suffix" data-index="${i}" value="${m.suffix || ''}" placeholder="M">
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('thesis-text').value = contentData.thesis || '';
+            
+            // Contact
+            document.getElementById('contact-email').value = contentData.contact?.email || '';
+            document.getElementById('contact-linkedin').value = contentData.contact?.linkedin || '';
+            document.getElementById('contact-calendar').value = contentData.contact?.calendar || '';
+            document.getElementById('contact-location').value = contentData.contact?.location || '';
+            
+            // Site
+            document.getElementById('site-title').value = contentData.site?.title || '';
+            document.getElementById('site-tagline').value = contentData.site?.tagline || '';
+        }
+        
+        async function saveSection(section) {
+            switch(section) {
+                case 'hero':
+                    contentData.hero = {
+                        badge: document.getElementById('hero-badge').value,
+                        title_line1: document.getElementById('hero-title1').value,
+                        title_line2: document.getElementById('hero-title2').value,
+                        subtitle: document.getElementById('hero-subtitle').value,
+                        description: document.getElementById('hero-description').value
+                    };
+                    break;
+                case 'about':
+                    const paragraphs = [];
+                    document.querySelectorAll('.paragraph-input').forEach(p => {
+                        paragraphs.push(p.value);
+                    });
+                    contentData.about = {
+                        section_label: document.getElementById('about-label').value,
+                        title: document.getElementById('about-title').value,
+                        signature: document.getElementById('about-signature').value,
+                        credentials: contentData.about?.credentials || [],
+                        paragraphs: paragraphs
+                    };
+                    break;
+                case 'ventures':
+                    document.querySelectorAll('.venture-id').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].id = el.value;
+                    });
+                    document.querySelectorAll('.venture-name').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].name = el.value;
+                    });
+                    document.querySelectorAll('.venture-tag').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].tag = el.value;
+                    });
+                    document.querySelectorAll('.venture-tagline').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].tagline = el.value;
+                    });
+                    document.querySelectorAll('.venture-description').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].description = el.value;
+                    });
+                    document.querySelectorAll('.venture-size').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].size = el.value;
+                    });
+                    document.querySelectorAll('.venture-stage').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.ventures[i].stage = el.value;
+                    });
+                    break;
+                case 'arsenal':
+                    document.querySelectorAll('.arsenal-category').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.arsenal[i].category = el.value;
+                    });
+                    document.querySelectorAll('.arsenal-name').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.arsenal[i].name = el.value;
+                    });
+                    document.querySelectorAll('.arsenal-icon').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.arsenal[i].icon = el.value;
+                    });
+                    document.querySelectorAll('.arsenal-context').forEach((el) => {
+                        const i = parseInt(el.dataset.index);
+                        contentData.arsenal[i].context = el.value;
+                    });
+                    break;
+                case 'contact':
+                    contentData.contact = {
+                        email: document.getElementById('contact-email').value,
+                        linkedin: document.getElementById('contact-linkedin').value,
+                        calendar: document.getElementById('contact-calendar').value,
+                        location: document.getElementById('contact-location').value
+                    };
+                    break;
+            }
+            
+            await saveContent();
+        }
+        
+        async function saveMetrics() {
+            document.querySelectorAll('.metric-value').forEach((el, i) => {
+                contentData.metrics[i].value = parseInt(el.value);
+            });
+            document.querySelectorAll('.metric-label').forEach((el, i) => {
+                contentData.metrics[i].label = el.value;
+            });
+            document.querySelectorAll('.metric-prefix').forEach((el, i) => {
+                contentData.metrics[i].prefix = el.value || undefined;
+            });
+            document.querySelectorAll('.metric-suffix').forEach((el, i) => {
+                contentData.metrics[i].suffix = el.value || undefined;
+            });
+            contentData.thesis = document.getElementById('thesis-text').value;
+            
+            await saveContent();
+        }
+        
+        async function saveSiteSettings() {
+            contentData.site = {
+                title: document.getElementById('site-title').value,
+                tagline: document.getElementById('site-tagline').value
+            };
+            await saveContent();
+        }
+        
+        async function saveContent() {
+            try {
+                const res = await fetch('/api/content', {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(contentData)
+                });
+                
+                if (res.ok) {
+                    showSuccess('Changes saved successfully!');
+                } else {
+                    showError('saveError', 'Failed to save changes');
+                }
+            } catch (err) {
+                showError('saveError', 'Connection error');
+            }
+        }
+        
+        function addParagraph() {
+            contentData.about.paragraphs.push('');
+            populateFields();
+        }
+        
+        // Add/Delete Ventures
+        function addVenture() {
+            const newVenture = {
+                id: 'new-venture-' + Date.now(),
+                name: 'NEW VENTURE',
+                tag: 'CATEGORY',
+                tagline: 'Your venture tagline',
+                description: 'Describe your venture here...',
+                size: 'small',
+                stage: 'planning'
+            };
+            contentData.ventures.push(newVenture);
+            populateFields();
+            showSuccess('New venture added! Fill in the details and save.');
+        }
+        
+        function deleteVenture(index) {
+            if (!confirm('Are you sure you want to delete this venture?')) return;
+            contentData.ventures.splice(index, 1);
+            populateFields();
+            showSuccess('Venture deleted. Click "Save All Ventures" to confirm.');
+        }
+        
+        // Add/Delete Skills
+        function addSkill() {
+            const newSkill = {
+                category: 'NEW CATEGORY',
+                name: 'New Skill',
+                icon: 'fa-code',
+                context: 'Describe how you use this skill...'
+            };
+            contentData.arsenal.push(newSkill);
+            populateFields();
+            showSuccess('New skill added! Fill in the details and save.');
+        }
+        
+        function deleteSkill(index) {
+            if (!confirm('Are you sure you want to delete this skill?')) return;
+            contentData.arsenal.splice(index, 1);
+            populateFields();
+            showSuccess('Skill deleted. Click "Save Arsenal" to confirm.');
+        }
+        
+        async function changePassword() {
+            const current = document.getElementById('current-password').value;
+            const newPass = document.getElementById('new-password').value;
+            const confirm = document.getElementById('confirm-password').value;
+            
+            if (newPass !== confirm) {
+                showError('saveError', 'Passwords do not match');
+                return;
+            }
+            
+            try {
+                const res = await fetch('/api/auth/change-password', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ currentPassword: current, newPassword: newPass })
+                });
+                
+                if (res.ok) {
+                    showSuccess('Password changed successfully!');
+                    document.getElementById('current-password').value = '';
+                    document.getElementById('new-password').value = '';
+                    document.getElementById('confirm-password').value = '';
+                } else {
+                    const data = await res.json();
+                    showError('saveError', data.error || 'Failed to change password');
+                }
+            } catch (err) {
+                showError('saveError', 'Connection error');
+            }
+        }
+        
+        // Logs functions
+        async function loadLogFiles() {
+            try {
+                const res = await fetch('/api/logs');
+                if (res.ok) {
+                    const data = await res.json();
+                    const select = document.getElementById('logFile');
+                    select.innerHTML = '<option value="">Today</option>';
+                    data.logs.forEach(file => {
+                        const option = document.createElement('option');
+                        option.value = file;
+                        option.textContent = file.replace('access-', '').replace('.log', '');
+                        select.appendChild(option);
+                    });
+                }
+            } catch (err) {
+                console.error('Failed to load log files:', err);
+            }
+        }
+        
+        async function loadLogs() {
+            const logFile = document.getElementById('logFile').value;
+            const tbody = document.getElementById('logsTableBody');
+            tbody.innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--text-muted);">Loading...</td></tr>';
+            
+            try {
+                const url = logFile ? `/api/logs/${logFile}` : '/api/logs-recent';
+                const res = await fetch(url);
+                
+                if (res.ok) {
+                    const data = await res.json();
+                    const entries = data.entries || [];
+                    
+                    if (entries.length === 0) {
+                        tbody.innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--text-muted);">No logs found</td></tr>';
+                        return;
+                    }
+                    
+                    tbody.innerHTML = entries.map(entry => {
+                        const time = entry.timestamp ? new Date(entry.timestamp).toLocaleTimeString() : '-';
+                        const statusClass = entry.status >= 400 ? 'error' : 'success';
+                        const method = entry.method || entry.level || '-';
+                        const methodClass = method.toLowerCase();
+                        const logUrl = entry.url || entry.message || '-';
+                        const ip = entry.ip ? entry.ip.replace('::ffff:', '') : '-';
+                        
+                        return `
+                            <tr>
+                                <td>${time}</td>
+                                <td><span class="log-method ${methodClass}">${method}</span></td>
+                                <td style="max-width: 240px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;" title="${logUrl}">${logUrl}</td>
+                                <td style="text-align: center;"><span class="log-status ${statusClass}">${entry.status || '-'}</span></td>
+                                <td style="text-align: right;">${entry.duration || '-'}</td>
+                                <td style="font-family: monospace; font-size: 0.8rem; color: var(--text-muted);">${ip}</td>
+                                <td>${entry.user || '-'}</td>
+                            </tr>
+                        `;
+                    }).join('');
+                } else {
+                    tbody.innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--danger);">Failed to load logs</td></tr>';
+                }
+            } catch (err) {
+                tbody.innerHTML = '<tr><td colspan="7" style="padding: 2rem; text-align: center; color: var(--danger);">Error loading logs</td></tr>';
+            }
+        }
+        
+        async function cleanupLogs() {
+            if (!confirm('Are you sure you want to delete logs older than 30 days?')) return;
+            
+            try {
+                const res = await fetch('/api/logs/cleanup?days=30', { method: 'DELETE' });
+                if (res.ok) {
+                    const data = await res.json();
+                    showSuccess(`Deleted ${data.deleted} old log file(s)`);
+                    loadLogFiles();
+                } else {
+                    showError('saveError', 'Failed to cleanup logs');
+                }
+            } catch (err) {
+                showError('saveError', 'Connection error');
+            }
+        }
+        
+        function closeModal() {
+            document.getElementById('editModal').classList.remove('show');
+        }
+    </script>
+</body>
+</html>
