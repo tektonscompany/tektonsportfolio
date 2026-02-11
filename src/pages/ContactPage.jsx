@@ -47,7 +47,7 @@ export default function ContactPage() {
                 bringing disciplined engineering to ambitious ideas. If your project
                 demands precision and technical depth, we should talk.
               </p>
-              <a href="mailto:info@tektons.co.uk" className="btn btn-primary">
+              <a href="mailto:tektonscompany@gmail.com" className="btn btn-primary">
                 Start a Conversation <ArrowRight size={16} />
               </a>
             </div>
