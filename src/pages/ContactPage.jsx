@@ -19,14 +19,14 @@ export default function ContactPage() {
             <a href="mailto:info@tektons.co.uk" className="contact-card">
               <Mail size={24} />
               <h3>Email</h3>
-              <p>info@tektons.co.uk</p>
+              <p>tektonscompany@gmail.com</p>
             </a>
             <a href="https://linkedin.com/company/tektons" target="_blank" rel="noopener noreferrer" className="contact-card">
               <Linkedin size={24} />
               <h3>LinkedIn</h3>
               <p>Follow Tektons</p>
             </a>
-            <a href="https://github.com/tektons" target="_blank" rel="noopener noreferrer" className="contact-card">
+            <a href="https://github.com/tektonscompany" target="_blank" rel="noopener noreferrer" className="contact-card">
               <Github size={24} />
               <h3>GitHub</h3>
               <p>View Repositories</p>
@@ -34,7 +34,7 @@ export default function ContactPage() {
             <div className="contact-card">
               <MapPin size={24} />
               <h3>Location</h3>
-              <p>London, United Kingdom</p>
+              <p>Accra, Ghana</p>
             </div>
           </div>
 
